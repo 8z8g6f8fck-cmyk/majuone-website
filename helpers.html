@@ -172,7 +172,7 @@ h2 { font-size: 11.5px; font-weight: 700; margin: 0; letter-spacing: .14em; text
 .ghead b { font-size: 14px; font-weight: 700; letter-spacing: .18em; color: var(--wine); }
 .ghead span { font-size: 11px; font-weight: 700; color: var(--muted); letter-spacing: .08em; text-align: right; }
 /* biodata sheet, styled after the Maju One MAID BIODATA document */
-.bio-bar { display: flex; gap: 8px; }
+.bio-bar { display: flex; flex-wrap: wrap; gap: 8px; } .bio-bar .btn { flex: 1 1 0; } .bio-bar .btn:first-child { flex-basis: 100%; }
 .bio-bar .btn { min-height: 46px; font-size: 13px; letter-spacing: .04em; }
 .bd { display: grid; gap: 14px; font-family: Arial, "Helvetica Neue", var(--body); color: #222; }
 .bd-page { background: #fff; border: 1px solid #ddd; padding: 16px 14px 10px; display: flex; flex-direction: column; gap: 10px; box-shadow: var(--shadow); }
@@ -419,7 +419,7 @@ var V = {
     var other = [h.pork ? "Can cook and handle pork" : "", h.dogs ? "Can work in a home with dogs" : "Prefers a home without dogs"].filter(Boolean);
     var fact = function (k, v) { return '<div class="cell"><span>' + k + "</span><b>" + v + "</b></div>"; };
     return '<div class="page"><div class="top noprint"><button class="icon" data-back aria-label="Back">' + I.back + '</button><span class="mini"><i></i>BIODATA</span><span style="width:40px"></span></div>' +
-      '<div class="bio-bar noprint"><button class="btn" data-print>Save PDF</button><a class="btn ghost" target="_blank" rel="noopener" href="' + esc(bioWa(h)) + '">Send on WhatsApp</a></div>' +
+      '<div class="bio-bar noprint"><a class="btn" data-ask target="_blank" rel="noopener" href="' + esc(wa("Hello Maju One, I would like to request an interview with " + h.name + " (Code " + mcode(h) + ").")) + '">Request Interview</a>' + (h.videoFile ? '<a class="btn ghost" target="_blank" rel="noopener" href="' + esc(h.videoFile) + '">Watch Video</a>' : "") + '<button class="btn ghost" data-print>Save PDF</button><a class="btn ghost" target="_blank" rel="noopener" href="' + esc(bioWa(h)) + '">Send on WhatsApp</a></div>' +
       '<article class="bd">' +
       '<section class="bd-page"><header class="bd-head"><img src="' + LOGO + '" alt="Maju One"><h2>MAID BIODATA</h2></header>' +
       '<div class="bd-sub">' + esc((h.country === "Philippines" ? "FILIPINA" : "INDONESIAN") + " – " + h.religion) + " | MAID CODE: " + esc(mcode(h)) + "</div>" +
@@ -464,12 +464,12 @@ app.addEventListener("click", function (e) {
   var b = e.target.closest("button,a"); if (!b) return; var d = b.dataset;
   if (d.go) go(d.go);
   else if (d.tab) go(d.tab);
-  else if (d.open) { S.from = S.view; S.id = d.open; S.view = "profile"; render(); }
+  else if (d.open) { S.from = S.view; S.id = d.open; S.view = "biodata"; render(); try { history.replaceState(null, "", "#" + S.id); } catch (err) {} }
   else if (d.g) { var same = S.view === "browse" && S.f.group === d.g; S.f.group = same ? "" : d.g; S.f.area = ""; if (S.view === "browse") render(false); else go("browse"); }
   else if ("area" in d) { S.f.area = d.area; render(false); }
   else if (d.cat) { S.f = noFilters(d.cat); S.q = ""; go("browse"); }
   else if ("clear" in d) { S.f = noFilters(); S.q = ""; render(false); }
-  else if ("back" in d) { if (S.view === "biodata") { S.view = "profile"; } else { S.view = S.from === "biodata" ? "browse" : S.from; } render(); }
+  else if ("back" in d) { if (S.view === "biodata") { S.view = (S.from && S.from !== "biodata" && S.from !== "profile") ? S.from : "browse"; try { history.replaceState(null, "", location.pathname); } catch (err) {} } else { S.view = S.from === "biodata" ? "browse" : S.from; } render(); }
   else if ("save" in d) { S.saved[S.id] = !S.saved[S.id]; render(false); }
   else if ("video" in d) {
     var vh = byId(S.id);
