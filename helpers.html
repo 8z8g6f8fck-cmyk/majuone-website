@@ -203,6 +203,7 @@ h2 { font-size: 11.5px; font-weight: 700; margin: 0; letter-spacing: .14em; text
 .bd-work td:first-child { width: 18px; text-align: center; } .bd-work td:nth-child(3) { white-space: nowrap; }
 .bd-none { font-size: 12px; margin: 4px 0; }
 .bd-fam th { width: 30%; }
+.bd-grid .cell.wide { grid-column: 1 / -1; }
 .hcard .code, .pcode { font-weight: 700; color: #7a1c2e; letter-spacing: .03em; }
 .pcode { font-size: 13px; margin-top: 2px; }
 .job { padding: 8px 0; border-bottom: 1px solid #eee; font-size: 14px; } .job:last-child { border-bottom: 0; }
@@ -309,8 +310,7 @@ function groupedList(list) {
 function mcode(h) { return h.code || h.id; }
 function famRows(h) {
   var f = h.family || {}, out = [];
-  if (h.weight) out.push(["Weight", h.weight + " kg"]);
-  ["Children", "Husband", "Father", "Mother", "Family position"].forEach(function (k) { if (f[k] && f[k] !== "—") out.push([k === "Husband" && /partner/i.test(f[k]) ? "Partner" : k, f[k].replace(/^Partner /i, "")]); });
+    ["Children", "Husband", "Father", "Mother", "Family position"].forEach(function (k) { if (f[k] && f[k] !== "—") out.push([k === "Husband" && /partner/i.test(f[k]) ? "Partner" : k, f[k].replace(/^Partner /i, "")]); });
   if (h.address) out.push(["Home address", h.address]);
   return out.map(function (r) { return "<tr><th>" + esc(r[0]) + "</th><td>" + esc(r[1]) + "</td></tr>"; }).join("");
 }
@@ -432,14 +432,13 @@ var V = {
       '<section class="bd-page"><header class="bd-head"><img src="' + LOGO + '" alt="Maju One"><h2>MAID BIODATA</h2></header>' +
       '<div class="bd-sub">' + esc((h.country === "Philippines" ? "FILIPINA" : "INDONESIAN") + " – " + h.religion) + " | MAID CODE: " + esc(mcode(h)) + "</div>" +
       '<div class="bd-main"><div class="bd-photo">' + face(h) + '</div><div class="bd-info"><div class="bd-grid">' +
-        fact("Name", esc(h.name.toUpperCase())) + fact("Age", h.age + "-year-old") + fact("Religion", esc(h.religion)) + fact("Height", h.height + " cm") +
-        fact("Status", esc(h.marital)) + fact("Experience", h.years + (h.years === 1 ? " year" : " years")) + fact("Origin", esc(place(h))) + fact("Availability", esc(h.status)) +
+        fact("Name", esc(h.name.toUpperCase())) + fact("Age", h.age + "-year-old") + fact("Religion", esc(h.religion)) + fact("Height / Weight", h.height + " cm" + (h.weight ? " / " + h.weight + " kg" : "")) +
+        fact("Status", esc(h.marital)) + fact("Experience", h.years + (h.years === 1 ? " year" : " years")) + '<div class="cell wide"><span>Origin</span><b>' + esc(place(h)) + "</b></div>" +
       '</div><div class="bd-why"><h4>WHY CONSIDER HER?</h4><ul>' + why + "</ul></div></div></div>" +
       '<h3 class="bd-bar">LANGUAGE</h3><table class="bd-t"><tbody>' + langRows + "</tbody></table>" +
-      '<h3 class="bd-bar">SKILLS</h3><div class="bd-tags">' + tags(h) + "</div>" +
-      '<h3 class="bd-bar">EMPLOYMENT HISTORY</h3>' + ((h.work || []).length ? '<table class="bd-t bd-work"><thead><tr><th>#</th><th>Country</th><th>Period</th><th>Position</th><th>Job Duties</th></tr></thead><tbody>' + workRows(h) + "</tbody></table>" : '<p class="bd-none">No overseas or employer work record yet. Willing to learn.</p>') +
+      '<h3 class="bd-bar">PERSONAL &amp; FAMILY DETAILS</h3><table class="bd-t bd-fam"><tbody>' + famRows(h) + '</tbody></table>' +
       '<footer class="bd-foot">AGENSI PEKERJAAN MAJU ONE SDN. BHD. | Professional Maid Matching</footer></section>' +
-      '<section class="bd-page bd-p2"><h3 class="bd-bar">PERSONAL &amp; FAMILY DETAILS</h3><table class="bd-t bd-fam"><tbody>' + famRows(h) + '</tbody></table><h3 class="bd-bar">SKILLS ASSESSMENT</h3><table class="bd-t bd-skill"><thead><tr><th>Task</th><th>Level</th></tr></thead><tbody>' + rows + "</tbody></table>" +
+      '<section class="bd-page bd-p2"><h3 class="bd-bar">SKILLS</h3><div class="bd-tags">' + tags(h) + '</div><h3 class="bd-bar">EMPLOYMENT HISTORY</h3>' + ((h.work || []).length ? '<table class="bd-t bd-work"><thead><tr><th>#</th><th>Country</th><th>Period</th><th>Position</th><th>Job Duties</th></tr></thead><tbody>' + workRows(h) + "</tbody></table>" : '<p class="bd-none">No overseas or employer work record yet. Willing to learn.</p>') + '<h3 class="bd-bar">SKILLS ASSESSMENT</h3><table class="bd-t bd-skill"><thead><tr><th>Task</th><th>Level</th></tr></thead><tbody>' + rows + "</tbody></table>" +
       '<h3 class="bd-bar">COMMENTS / REMARKS</h3><ul class="fit">' + (h.remarks || []).concat(other.filter(function (t) { return (h.remarks || []).indexOf(t) < 0; })).map(function (t) { return "<li>" + esc(t) + "</li>"; }).join("") + "</ul>" +
       '<div class="bd-note"><b>AGENCY NOTE</b><br>Prepared by Agensi Pekerjaan Maju One Sdn. Bhd. | Customer Presentation Copy. Phone numbers and ID documents are kept in the agency\'s internal record.</div>' +
       '<div class="bd-contact">WhatsApp 018-989 1966 · Call 018-577 1089 · majuone.com.my/helpers#' + esc(h.id) + "</div>" +
