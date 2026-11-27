@@ -390,7 +390,12 @@ var V = {
       (h.videoFile ? '<button class="hero" data-video>' + face(h, "face") + '<span class="lab">Introduction Video</span><span class="play"></span><span class="dur">' + esc(h.video) + "</span></button>" : '<div class="hero">' + face(h, "face") + "</div>") +
       '<div class="pname"><div class="nameline"><h1>' + esc(h.name) + "</h1>" + pill(h) + '</div><div class="sub">' + esc(h.country.toUpperCase()) + " · " + esc(place(h)) + '</div><div class="pcode">MAID CODE: ' + esc(mcode(h)) + '</div><div class="exp">' + yrs(h.years) + "</div></div>" +
       '<div class="facts"><div><span>Age</span>' + h.age + " years</div><div><span>Marital Status</span>" + esc(h.marital) + "</div><div><span>Religion</span>" + esc(h.religion) + "</div><div><span>Height</span>" + h.height + " cm</div></div>" +
-      '<div class="actions"><button class="btn" data-bio>View Full Biodata</button><a class="btn ghost" data-ask target="_blank" rel="noopener" href="' + esc(wa(msg)) + '">' + I.cal + 'Request Interview</a><a class="btn ghost" target="_blank" rel="noopener" href="' + esc(wa("Hello Maju One, I have a question about " + h.name + " (Code " + mcode(h) + ").")) + '">' + I.chat + "Chat with Agency</a></div></div>";
+      "<div class=\"sect\"><h2>Skills</h2>" + tags(h) + "</div><div class=\"sect\"><h2>Languages</h2>" + Object.keys(h.langs).map(function (l) {
+        var dots = ""; for (var i = 1; i <= 5; i++) dots += "<i" + (i <= h.langs[l] ? ' class="f"' : "") + "></i>";
+        return '<div class="lang"><span>' + esc(l) + '</span><span class="dots" role="img" aria-label="' + h.langs[l] + ' out of 5">' + dots + "</span></div>";
+      }).join("") + "</div>" +
+      fitList("Best Suited For", h.bestFor) + ((h.work || []).length ? '<div class="sect"><h2>Work Experience</h2>' + h.work.map(function (w) { return '<div class="job"><b>' + esc(w.position) + "</b> · " + esc(w.country) + '<span>' + esc(w.period) + "</span><p>" + esc(w.duties) + "</p></div>"; }).join("") + "</div>" : "") + fitList("Remarks", h.remarks) +
+      '<div class="actions"><button class="btn ghost" data-bio>View Biodata</button><a class="btn" data-ask target="_blank" rel="noopener" href="' + esc(wa(msg)) + '">' + I.cal + 'Request Interview</a><a class="btn ghost" target="_blank" rel="noopener" href="' + esc(wa("Hello Maju One, I have a question about " + h.name + " (Code " + mcode(h) + ").")) + '">' + I.chat + "Chat with Agency</a></div></div>";
   },
   biodata: function () {
     var h = byId(S.id), all = (h.bestFor || []).concat(h.remarks || []);
@@ -459,12 +464,12 @@ app.addEventListener("click", function (e) {
   var b = e.target.closest("button,a"); if (!b) return; var d = b.dataset;
   if (d.go) go(d.go);
   else if (d.tab) go(d.tab);
-  else if (d.open) { S.from = S.view; S.id = d.open; S.view = "profile"; render(); }
+  else if (d.open) { S.from = S.view; S.id = d.open; S.view = "biodata"; render(); try { history.replaceState(null, "", "#" + S.id); } catch (err) {} }
   else if (d.g) { var same = S.view === "browse" && S.f.group === d.g; S.f.group = same ? "" : d.g; S.f.area = ""; if (S.view === "browse") render(false); else go("browse"); }
   else if ("area" in d) { S.f.area = d.area; render(false); }
   else if (d.cat) { S.f = noFilters(d.cat); S.q = ""; go("browse"); }
   else if ("clear" in d) { S.f = noFilters(); S.q = ""; render(false); }
-  else if ("back" in d) { if (S.view === "biodata") { S.view = "profile"; try { history.replaceState(null, "", location.pathname); } catch (err) {} } else { S.view = S.from === "biodata" ? "browse" : S.from; } render(); }
+  else if ("back" in d) { if (S.view === "biodata") { S.view = (S.from && S.from !== "biodata" && S.from !== "profile") ? S.from : "browse"; try { history.replaceState(null, "", location.pathname); } catch (err) {} } else { S.view = S.from === "biodata" ? "browse" : S.from; } render(); }
   else if ("save" in d) { S.saved[S.id] = !S.saved[S.id]; render(false); }
   else if ("video" in d) {
     var vh = byId(S.id);
