@@ -412,7 +412,7 @@ var V = {
     var TASKS = [["Housekeeping", /housework|cleaning|clean|domestic helper/i], ["Laundry & ironing", /laundry|ironing/i], ["Cooking", /cook/i], ["Newborn care", /newborn|baby/i], ["Child care", /child care|children aged|year-old|school/i], ["Elderly care", /elderly|year-old stroke|elder/i], ["Caring for the sick", /sick|stroke|patient/i], ["Bedridden care", /bedridden|paralys/i], ["Special needs children", /special needs/i], ["Pet care", /\bpets?\b|\bdogs?\b|\bcats?\b/i], ["Car washing", /car wash/i], ["Gardening", /garden/i]];
     var TAG = { "Housekeeping": "Housekeeping", "Cooking": "Cooking", "Child care": "Child Care", "Elderly care": "Elderly Care", "Pet care": "Pet Care" };
     var rows = TASKS.map(function (t) {
-      var best = (h.bestFor || []).concat((h.work || []).map(function (w) { return w.position + " " + w.duties; })).filter(function (x) { return t[1].test(x) && !/prefers a home without/i.test(x); })[0];
+      var best = (h.bestFor || []).concat((h.work || []).map(function (w) { return w.position + " " + w.duties; })).filter(function (x) { return t[1].test(x) && !/prefers a home without|own family|at home|her own/i.test(x); })[0];
       var rems = (h.remarks || []).filter(function (x) { return t[1].test(x); });
       var rem = rems.filter(function (x) { return /not for an employer|not with an employer|can do|can cook|willing to learn|no experience|prefers a home/i.test(x); })[0] || rems[0] || "";
       var st, cls;
