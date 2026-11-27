@@ -171,46 +171,58 @@ h2 { font-size: 11.5px; font-weight: 700; margin: 0; letter-spacing: .14em; text
 .ghead { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; margin-top: 10px; padding-bottom: 7px; border-bottom: 1px solid var(--gold); }
 .ghead b { font-size: 14px; font-weight: 700; letter-spacing: .18em; color: var(--wine); }
 .ghead span { font-size: 11px; font-weight: 700; color: var(--muted); letter-spacing: .08em; text-align: right; }
-/* biodata sheet */
+/* biodata sheet, styled after the Maju One MAID BIODATA document */
 .bio-bar { display: flex; gap: 8px; }
 .bio-bar .btn { min-height: 46px; font-size: 13px; letter-spacing: .04em; }
-.sheet { background: #fff; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; box-shadow: var(--shadow); }
-.sheet-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 14px 16px; border-bottom: 3px solid var(--wine); }
-.sheet-head img { height: 34px; width: auto; }
-.sheet-head .code { text-align: right; font-size: 10.5px; font-weight: 700; letter-spacing: .12em; color: var(--muted); }
-.sheet-head .code b { display: block; font-family: var(--display); font-size: 20px; letter-spacing: 0; color: var(--wine); }
-.sheet-title { background: var(--wine); color: #fff; text-align: center; font-size: 11px; font-weight: 800; letter-spacing: .3em; padding: 6px; }
-.sheet-top { display: grid; grid-template-columns: 38% 1fr; gap: 14px; padding: 16px; }
-.sheet-top .ph { aspect-ratio: 3 / 4; border: 1px solid var(--gold-soft); border-radius: 10px; overflow: hidden; background: #f4f1ec; }
-.sheet-top .ph img { width: 100%; height: 100%; object-fit: contain; display: block; }
-.sheet-top .ph svg { width: 100%; height: 100%; }
-.sheet-top h3 { font-family: var(--display); font-weight: 600; font-size: 26px; margin: 0; line-height: 1.1; }
-.sheet-top .grp { font-size: 11px; font-weight: 800; letter-spacing: .12em; color: var(--wine); margin: 4px 0 10px; }
-.kv { display: grid; grid-template-columns: auto 1fr; gap: 4px 10px; font-size: 13px; margin: 0; }
-.kv dt { color: var(--muted); font-weight: 600; }
-.kv dd { margin: 0; font-weight: 700; }
-.sheet-sec { padding: 12px 16px; border-top: 1px solid var(--line); }
-.sheet-sec h4 { margin: 0 0 7px; font-size: 10.5px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: var(--wine); }
-.sheet-foot { padding: 12px 16px; background: var(--wine-deep); color: var(--gold-soft); font-size: 12px; font-weight: 600; display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+.bd { display: grid; gap: 14px; font-family: Arial, "Helvetica Neue", var(--body); color: #222; }
+.bd-page { background: #fff; border: 1px solid #ddd; padding: 16px 14px 10px; display: flex; flex-direction: column; gap: 10px; box-shadow: var(--shadow); }
+.bd-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; border-bottom: 2px solid #7a1c2e; padding-bottom: 8px; }
+.bd-head img { height: 40px; width: auto; }
+.bd-head h2 { margin: 0; font-size: 17px; font-weight: 700; letter-spacing: .02em; color: #7a1c2e; text-transform: none; }
+.bd-sub { text-align: center; font-size: 11.5px; font-weight: 700; color: #7a1c2e; }
+.bd-main { display: grid; grid-template-columns: 38% 1fr; border: 1.5px solid #222; }
+.bd-photo { border-right: 1.5px solid #222; background: #fff; display: flex; align-items: center; justify-content: center; }
+.bd-photo img { width: 100%; height: 100%; max-height: 330px; object-fit: contain; display: block; }
+.bd-photo svg { width: 100%; }
+.bd-info { padding: 8px; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.bd-grid { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid #222; }
+.bd-grid .cell { padding: 4px 6px; border-bottom: 1px solid #222; min-width: 0; }
+.bd-grid .cell:nth-child(odd) { border-right: 1px solid #222; }
+.bd-grid .cell:nth-last-child(-n+2) { border-bottom: 0; }
+.bd-grid span { display: block; font-size: 9.5px; font-weight: 700; color: #7a1c2e; text-transform: uppercase; }
+.bd-grid b { display: block; font-size: 12px; overflow-wrap: anywhere; }
+.bd-why h4 { margin: 0 0 4px; font-size: 11px; font-weight: 700; color: #7a1c2e; }
+.bd-why ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 3px; font-size: 11px; }
+.bd-why li::before { content: "\2713  "; color: #7a1c2e; font-weight: 700; }
+.bd-bar { margin: 4px 0 0; background: #7a1c2e; color: #fff; font-size: 11px; font-weight: 700; letter-spacing: .04em; padding: 6px 8px; }
+.bd-t { width: 100%; border-collapse: collapse; font-size: 12px; }
+.bd-t th, .bd-t td { border: 1px solid #999; padding: 6px 8px; text-align: left; }
+.bd-t th { font-weight: 700; width: 46%; background: #fcf3f4; }
+.bd-skill thead th { background: #7a1c2e; color: #fff; font-size: 11px; }
+.lvl { font-weight: 700; }
+.lvl.ok { color: #1f6b3a; } .lvl.mid { color: #8a5a12; } .lvl.new { color: #7a1c2e; }
+.bd-tags .tags { margin-top: 0; }
+.bd .fit { font-size: 12.5px; }
+.bd-note { font-size: 10.5px; color: #666; border-top: 1px solid #ddd; padding-top: 8px; }
+.bd-note b { color: #7a1c2e; font-size: 11px; }
+.bd-contact { font-size: 12px; font-weight: 700; color: #7a1c2e; }
+.bd-foot { margin-top: auto; text-align: center; font-size: 9.5px; color: #888; padding-top: 6px; }
 @media print {
-  @page { size: A4; margin: 12mm; }
+  @page { size: A4; margin: 10mm; }
   body, #app { background: #fff !important; }
   #app { max-width: none; }
   .noprint, .tabs, .toast { display: none !important; }
   .page { padding: 0; }
-  .sheet { border: 0; box-shadow: none; border-radius: 0; }
-  .sheet-top { grid-template-columns: 23% 1fr; }
-  .sheet, .sheet * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-  .sheet { break-inside: avoid; font-size: 15px; }
-  .sheet-head img { height: 52px; }
-  .sheet-head .code { font-size: 12px; } .sheet-head .code b { font-size: 28px; }
-  .sheet-title { font-size: 13px; padding: 8px; }
-  .sheet-top { padding: 14px 20px; gap: 22px; }
-  .sheet-top h3 { font-size: 38px; } .sheet-top .grp { font-size: 13px; }
-  .kv { font-size: 14px; gap: 4px 16px; }
-  .sheet-sec { padding: 7px 20px; } .sheet-sec h4 { margin-bottom: 5px; } .sheet-sec h4 { font-size: 12px; }
-  .sheet .fit, .sheet .lang { font-size: 13px; } .sheet .fit { gap: 3px; } .sheet .tag { font-size: 13px; }
-  .sheet-foot { font-size: 13px; padding: 12px 20px; }
+  .bd { gap: 0; }
+  .bd-page { border: 0; box-shadow: none; min-height: 270mm; padding: 0; break-after: page; gap: 12px; }
+  .bd-page:last-child { break-after: auto; }
+  .bd-head img { height: 58px; } .bd-head h2 { font-size: 24px; }
+  .bd-sub { font-size: 13px; }
+  .bd-photo img { max-height: 105mm; }
+  .bd-grid span { font-size: 10px; } .bd-grid b { font-size: 13px; }
+  .bd-why h4 { font-size: 12.5px; } .bd-why ul { font-size: 12.5px; gap: 4px; }
+  .bd-bar { font-size: 12.5px; } .bd-t { font-size: 13px; } .bd .fit { font-size: 13px; }
+  .bd, .bd * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 }
 .toast { position: fixed; left: 50%; bottom: 84px; transform: translateX(-50%); width: min(340px, calc(100% - 32px)); background: var(--ink); color: #fff; border-radius: 10px; padding: 10px 14px; font-size: 14px; text-align: center; z-index: 5; }
 @media (prefers-reduced-motion: no-preference) { .hcard, .gcard, .cat span.ring { transition: transform .15s ease; } .hcard:active, .gcard:active { transform: scale(.985); } }
@@ -376,22 +388,44 @@ var V = {
       '<div class="actions"><button class="btn ghost" data-bio>View Biodata</button><a class="btn" data-ask target="_blank" rel="noopener" href="' + esc(wa(msg)) + '">' + I.cal + 'Request Interview</a><a class="btn ghost" target="_blank" rel="noopener" href="' + esc(wa("Hello Maju One, I have a question about " + h.name + " (" + h.id + ").")) + '">' + I.chat + "Chat with Agency</a></div></div>";
   },
   biodata: function () {
-    var h = byId(S.id);
-    var langs = Object.keys(h.langs).filter(function (l) { return h.langs[l] > 0; }).map(function (l) {
-      var dots = ""; for (var i = 1; i <= 5; i++) dots += "<i" + (i <= h.langs[l] ? ' class="f"' : "") + "></i>";
-      return '<div class="lang"><span>' + esc(l) + '</span><span class="dots" role="img" aria-label="' + h.langs[l] + ' out of 5">' + dots + "</span></div>";
+    var h = byId(S.id), all = (h.bestFor || []).concat(h.remarks || []);
+    var LV = { 5: "Fluent", 4.5: "Very good", 4: "Good", 3: "Fair", 2: "Basic", 1: "Basic" };
+    var langRows = Object.keys(h.langs).map(function (l) { var v = h.langs[l]; return "<tr><th>" + esc(l) + "</th><td>" + (v > 0 ? (LV[v] || (v >= 4 ? "Good" : "Basic")) : "Willing to learn") + "</td></tr>"; }).join("");
+    var TASKS = [["Housekeeping", /housework|cleaning|clean|domestic helper/i], ["Laundry & ironing", /laundry|ironing/i], ["Cooking", /cook/i], ["Newborn care", /newborn|baby/i], ["Child care", /child care|children aged|year-old|school/i], ["Elderly care", /elderly|year-old stroke|elder/i], ["Caring for the sick", /sick|stroke|patient/i], ["Bedridden care", /bedridden|paralys/i], ["Special needs children", /special needs/i], ["Pet care", /pet|dog|cat/i], ["Car washing", /car wash/i], ["Gardening", /garden/i]];
+    var rows = TASKS.map(function (t) {
+      var best = (h.bestFor || []).filter(function (x) { return t[1].test(x) && !/prefers a home without/i.test(x); })[0];
+      var rems = (h.remarks || []).filter(function (x) { return t[1].test(x); });
+      var rem = rems.filter(function (x) { return /not for an employer|not with an employer|can do|can cook|willing to learn|no experience|prefers a home/i.test(x); })[0] || rems[0] || "";
+      var st, cls;
+      if (best) { st = "Experienced"; cls = "ok"; }
+      else if (/not for an employer|not with an employer|her own|family/i.test(rem)) { st = "Own family experience"; cls = "mid"; }
+      else if (/can do it|can cook|can do/i.test(rem)) { st = "Can do"; cls = "mid"; }
+      else if (/willing to learn|no experience/i.test(rem)) { st = "Willing to learn"; cls = "new"; }
+      else if (/prefers a home without dogs/i.test(rem) && t[0] === "Pet care") { st = "Prefers no dogs"; cls = "new"; }
+      else return "";
+      return '<tr><th>' + t[0] + '</th><td><span class="lvl ' + cls + '">' + st + "</span></td></tr>";
     }).join("");
-    var list = function (a) { return a && a.length ? '<ul class="fit">' + a.map(function (t) { return "<li>" + esc(t) + "</li>"; }).join("") + "</ul>" : ""; };
-    var sec = function (t, body) { return body ? '<div class="sheet-sec"><h4>' + t + "</h4>" + body + "</div>" : ""; };
+    var why = (h.bestFor || []).slice(0, 6).map(function (t) { return "<li>" + esc(t) + "</li>"; }).join("");
     var other = [h.pork ? "Can cook and handle pork" : "", h.dogs ? "Can work in a home with dogs" : "Prefers a home without dogs"].filter(Boolean);
+    var fact = function (k, v) { return '<div class="cell"><span>' + k + "</span><b>" + v + "</b></div>"; };
     return '<div class="page"><div class="top noprint"><button class="icon" data-back aria-label="Back">' + I.back + '</button><span class="mini"><i></i>BIODATA</span><span style="width:40px"></span></div>' +
       '<div class="bio-bar noprint"><button class="btn" data-print>Save PDF</button><a class="btn ghost" target="_blank" rel="noopener" href="' + esc(bioWa(h)) + '">Send on WhatsApp</a></div>' +
-      '<article class="sheet"><div class="sheet-head"><img src="' + LOGO + '" alt="Maju One"><div class="code">MAID CODE<b>' + esc(h.id) + "</b></div></div><div class=\"sheet-title\">HELPER BIODATA</div>" +
-      '<div class="sheet-top"><div class="ph">' + face(h) + '</div><div><h3>' + esc(h.name) + '</h3><div class="grp">' + esc(h.country.toUpperCase()) + " · " + esc(place(h)) + "</div>" +
-      '<dl class="kv"><dt>Age</dt><dd>' + h.age + " years</dd><dt>Experience</dt><dd>" + h.years + (h.years === 1 ? " year" : " years") + "</dd><dt>Marital status</dt><dd>" + esc(h.marital) + "</dd><dt>Religion</dt><dd>" + esc(h.religion) + "</dd><dt>Height</dt><dd>" + h.height + ' cm</dd><dt>Status</dt><dd>' + esc(h.status) + "</dd></dl></div></div>" +
-      sec("Skills", tags(h)) + sec("Languages", langs) + sec("Best suited for", list(h.bestFor)) + sec("Remarks", list(h.remarks)) + sec("Other", list(other)) +
-      '<div class="sheet-foot"><span>Maju One · WhatsApp 018-989 1966</span><span>majuone.com.my/helpers</span></div></article>' +
-      '<p class="sub noprint">Tip: tap Send on WhatsApp to share this helper\'s link. The employer opens it straight to this biodata.</p></div>';
+      '<article class="bd">' +
+      '<section class="bd-page"><header class="bd-head"><img src="' + LOGO + '" alt="Maju One"><h2>MAID BIODATA</h2></header>' +
+      '<div class="bd-sub">' + esc((h.country === "Philippines" ? "FILIPINA" : "INDONESIAN") + " – " + h.religion) + " | MAID CODE: " + esc(h.id) + "</div>" +
+      '<div class="bd-main"><div class="bd-photo">' + face(h) + '</div><div class="bd-info"><div class="bd-grid">' +
+        fact("Name", esc(h.name.toUpperCase())) + fact("Age", h.age + "-year-old") + fact("Religion", esc(h.religion)) + fact("Height", h.height + " cm") +
+        fact("Status", esc(h.marital)) + fact("Experience", h.years + (h.years === 1 ? " year" : " years")) + fact("Origin", esc(place(h))) + fact("Availability", esc(h.status)) +
+      '</div><div class="bd-why"><h4>WHY CONSIDER HER?</h4><ul>' + why + "</ul></div></div></div>" +
+      '<h3 class="bd-bar">LANGUAGE</h3><table class="bd-t"><tbody>' + langRows + "</tbody></table>" +
+      '<h3 class="bd-bar">SKILLS</h3><div class="bd-tags">' + tags(h) + "</div>" +
+      '<footer class="bd-foot">AGENSI PEKERJAAN MAJU ONE SDN. BHD. | Professional Maid Matching</footer></section>' +
+      '<section class="bd-page bd-p2"><h3 class="bd-bar">SKILLS ASSESSMENT</h3><table class="bd-t bd-skill"><thead><tr><th>Task</th><th>Level</th></tr></thead><tbody>' + rows + "</tbody></table>" +
+      '<h3 class="bd-bar">COMMENTS / REMARKS</h3><ul class="fit">' + (h.remarks || []).concat(other).map(function (t) { return "<li>" + esc(t) + "</li>"; }).join("") + "</ul>" +
+      '<div class="bd-note"><b>AGENCY NOTE</b><br>Prepared by Agensi Pekerjaan Maju One Sdn. Bhd. | Customer Presentation Copy. Personal contact and address details are kept in the agency\'s internal record.</div>' +
+      '<div class="bd-contact">WhatsApp 018-989 1966 · Call 018-577 1089 · majuone.com.my/helpers#' + esc(h.id) + "</div>" +
+      '<footer class="bd-foot">AGENSI PEKERJAAN MAJU ONE SDN. BHD. | Professional Maid Matching</footer></section>' +
+      "</article></div>";
   },
   interviews: function () {
     var ids = Object.keys(S.asked);
