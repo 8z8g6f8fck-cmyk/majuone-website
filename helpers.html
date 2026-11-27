@@ -409,18 +409,20 @@ var V = {
     var h = byId(S.id), all = (h.bestFor || []).concat(h.remarks || []);
     var LV = { 5: "Fluent", 4.5: "Very good", 4: "Good", 3: "Fair", 2: "Basic", 1: "Basic" };
     var langRows = Object.keys(h.langs).map(function (l) { var v = h.langs[l]; return "<tr><th>" + esc(l) + "</th><td>" + (v > 0 ? (LV[v] || (v >= 4 ? "Good" : "Basic")) : "Willing to learn") + "</td></tr>"; }).join("");
-    var TASKS = [["Housekeeping", /housework|cleaning|clean|domestic helper/i], ["Laundry & ironing", /laundry|ironing/i], ["Cooking", /cook/i], ["Newborn care", /newborn|baby/i], ["Child care", /child care|children aged|year-old|school/i], ["Elderly care", /elderly|year-old stroke|elder/i], ["Caring for the sick", /sick|stroke|patient/i], ["Bedridden care", /bedridden|paralys/i], ["Special needs children", /special needs/i], ["Pet care", /pet|dog|cat/i], ["Car washing", /car wash/i], ["Gardening", /garden/i]];
+    var TASKS = [["Housekeeping", /housework|cleaning|clean|domestic helper/i], ["Laundry & ironing", /laundry|ironing/i], ["Cooking", /cook/i], ["Newborn care", /newborn|baby/i], ["Child care", /child care|children aged|year-old|school/i], ["Elderly care", /elderly|year-old stroke|elder/i], ["Caring for the sick", /sick|stroke|patient/i], ["Bedridden care", /bedridden|paralys/i], ["Special needs children", /special needs/i], ["Pet care", /\bpets?\b|\bdogs?\b|\bcats?\b/i], ["Car washing", /car wash/i], ["Gardening", /garden/i]];
+    var TAG = { "Housekeeping": "Housekeeping", "Cooking": "Cooking", "Child care": "Child Care", "Elderly care": "Elderly Care", "Pet care": "Pet Care" };
     var rows = TASKS.map(function (t) {
-      var best = (h.bestFor || []).filter(function (x) { return t[1].test(x) && !/prefers a home without/i.test(x); })[0];
+      var best = (h.bestFor || []).concat((h.work || []).map(function (w) { return w.position + " " + w.duties; })).filter(function (x) { return t[1].test(x) && !/prefers a home without/i.test(x); })[0];
       var rems = (h.remarks || []).filter(function (x) { return t[1].test(x); });
       var rem = rems.filter(function (x) { return /not for an employer|not with an employer|can do|can cook|willing to learn|no experience|prefers a home/i.test(x); })[0] || rems[0] || "";
       var st, cls;
       if (best) { st = "Experienced"; cls = "ok"; }
       else if (/not for an employer|not with an employer|her own|family/i.test(rem)) { st = "Own family experience"; cls = "mid"; }
+      else if ((TAG[t[0]] && h.skills.indexOf(TAG[t[0]]) >= 0) && !/willing to learn|no experience|prefers a home/i.test(rem)) { st = "Experienced"; cls = "ok"; }
       else if (/can do it|can cook|can do/i.test(rem)) { st = "Can do"; cls = "mid"; }
       else if (/willing to learn|no experience/i.test(rem)) { st = "Willing to learn"; cls = "new"; }
       else if (/prefers a home without dogs/i.test(rem) && t[0] === "Pet care") { st = "Prefers no dogs"; cls = "new"; }
-      else return "";
+      else { st = "Willing to learn"; cls = "new"; }
       return '<tr><th>' + t[0] + '</th><td><span class="lvl ' + cls + '">' + st + "</span></td></tr>";
     }).join("");
     var why = (h.bestFor || []).slice(0, 6).map(function (t) { return "<li>" + esc(t) + "</li>"; }).join("");
