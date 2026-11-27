@@ -429,8 +429,9 @@ var V = {
       '</div><div class="bd-why"><h4>WHY CONSIDER HER?</h4><ul>' + why + "</ul></div></div></div>" +
       '<h3 class="bd-bar">LANGUAGE</h3><table class="bd-t"><tbody>' + langRows + "</tbody></table>" +
       '<h3 class="bd-bar">SKILLS</h3><div class="bd-tags">' + tags(h) + "</div>" +
+      '<h3 class="bd-bar">EMPLOYMENT HISTORY</h3>' + ((h.work || []).length ? '<table class="bd-t bd-work"><thead><tr><th>#</th><th>Country</th><th>Period</th><th>Position</th><th>Job Duties</th></tr></thead><tbody>' + workRows(h) + "</tbody></table>" : '<p class="bd-none">No overseas or employer work record yet. Willing to learn.</p>') +
       '<footer class="bd-foot">AGENSI PEKERJAAN MAJU ONE SDN. BHD. | Professional Maid Matching</footer></section>' +
-      '<section class="bd-page bd-p2"><h3 class="bd-bar">EMPLOYMENT HISTORY</h3>' + ((h.work || []).length ? '<table class="bd-t bd-work"><thead><tr><th>#</th><th>Country</th><th>Period</th><th>Position</th><th>Job Duties</th></tr></thead><tbody>' + workRows(h) + "</tbody></table>" : '<p class="bd-none">No overseas or employer work record yet. Willing to learn.</p>') + '<h3 class="bd-bar">SKILLS ASSESSMENT</h3><table class="bd-t bd-skill"><thead><tr><th>Task</th><th>Level</th></tr></thead><tbody>' + rows + "</tbody></table>" +
+      '<section class="bd-page bd-p2"><h3 class="bd-bar">SKILLS ASSESSMENT</h3><table class="bd-t bd-skill"><thead><tr><th>Task</th><th>Level</th></tr></thead><tbody>' + rows + "</tbody></table>" +
       '<h3 class="bd-bar">COMMENTS / REMARKS</h3><ul class="fit">' + (h.remarks || []).concat(other).map(function (t) { return "<li>" + esc(t) + "</li>"; }).join("") + "</ul>" +
       '<div class="bd-note"><b>AGENCY NOTE</b><br>Prepared by Agensi Pekerjaan Maju One Sdn. Bhd. | Customer Presentation Copy. Personal contact and address details are kept in the agency\'s internal record.</div>' +
       '<div class="bd-contact">WhatsApp 018-989 1966 · Call 018-577 1089 · majuone.com.my/helpers#' + esc(h.id) + "</div>" +
