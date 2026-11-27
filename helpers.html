@@ -432,8 +432,8 @@ var V = {
       '<section class="bd-page"><header class="bd-head"><img src="' + LOGO + '" alt="Maju One"><h2>MAID BIODATA</h2></header>' +
       '<div class="bd-sub">' + esc((h.country === "Philippines" ? "FILIPINA" : "INDONESIAN") + " – " + h.religion) + " | MAID CODE: " + esc(mcode(h)) + "</div>" +
       '<div class="bd-main"><div class="bd-photo">' + face(h) + '</div><div class="bd-info"><div class="bd-grid">' +
-        fact("Name", esc(h.name.toUpperCase())) + fact("Age", h.age + "-year-old") + fact("Religion", esc(h.religion)) + fact("Height / Weight", h.height + " cm" + (h.weight ? " / " + h.weight + " kg" : "")) +
-        fact("Status", esc(h.marital)) + fact("Experience", h.years + (h.years === 1 ? " year" : " years")) + '<div class="cell wide"><span>Origin</span><b>' + esc(place(h)) + "</b></div>" +
+        fact("Name", esc(h.name.toUpperCase())) + fact("Age", h.age + "-year-old") + fact("Religion", esc(h.religion)) + fact("Status", esc(h.marital)) +
+        fact("Height", h.height + " cm") + fact("Weight", h.weight ? h.weight + " kg" : "—") + fact("Experience", h.years + (h.years === 1 ? " year" : " years")) + fact("Origin", esc(place(h))) +
       '</div><div class="bd-why"><h4>WHY CONSIDER HER?</h4><ul>' + why + "</ul></div></div></div>" +
       '<h3 class="bd-bar">LANGUAGE</h3><table class="bd-t"><tbody>' + langRows + "</tbody></table>" +
       '<h3 class="bd-bar">PERSONAL &amp; FAMILY DETAILS</h3><table class="bd-t bd-fam"><tbody>' + famRows(h) + '</tbody></table>' +
